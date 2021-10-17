@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS users(
+    id BIGINT AUTO_INCREMENT,
+    age INT NOT NULL,
+    adjective VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(200) NOT NULL,
+    gender VARCHAR(50) NOT NULL,
+    profile_img_src VARCHAR(100) NOT NULL,
+    introduction VARCHAR(200),
+    job VARCHAR(50) NOT NULL,
+    display_name VARCHAR(50) NOT NULL,
+    address VARCHAR(100) NOT NULL,
+    university VARCHAR(100) NOT NULL,
+    is_public TINYINT(1) NOT NULL,
+    is_graduate TINYINT(1) NOT NULL,
+    phone_number VARCHAR(100) NOT NULL,
+    work_place VARCHAR(100),
+    resume VARCHAR(200),
+    is_location_public TINYINT(1) NOT NULL,
+    longitude DOUBLE NOT NULL,
+    latitude DOUBLE NOT NULL,
+    CONSTRAINT USERS_PK PRIMARY KEY(id)
+)
