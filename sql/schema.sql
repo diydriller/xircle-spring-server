@@ -19,5 +19,74 @@ CREATE TABLE IF NOT EXISTS users(
     is_location_public TINYINT(1) NOT NULL,
     longitude DOUBLE NOT NULL,
     latitude DOUBLE NOT NULL,
-    CONSTRAINT USERS_PK PRIMARY KEY(id)
+    created_at DATETIME DEFAULT CURRENT_DATE,
+    PRIMARY KEY(id)
 )
+
+CREATE TABLE IF NOT EXISTS follow(
+    id BIGINT AUTO_INCREMENT,
+    member_id BIGINT NOT NULL,
+    target_member_id BIGINT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_DATE,
+    PRIMARY KEY(id),
+    FOREIGN KEY(member_id) REFERENCES users(id),
+    FOREIGN KEY(target_member_id) REFERENCES users(id)
+)
+
+CREATE TABLE IF NOT EXISTS post(
+    id BIGINT AUTO_INCREMENT,
+    content TEXT NOT NULL,
+    title VARCHAR(50) NOT NULL,
+    post_img_src VARCHAR(100) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_DATE,
+    PRIMARY KEY(id)
+)
+
+CREATE TABLE IF NOT EXISTS hashtag(
+    id BIGINT AUTO_INCREMENT,
+    hashtag VARCHAR(50) NOT NULL,
+    post_id BIGINT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_DATE,
+    PRIMARY KEY(id)
+)
+
+CREATE TABLE IF NOT EXISTS user_hashtag(
+    id BIGINT AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    hashtag_id BIGINT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_DATE,
+    PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY(hashtag_id) REFERENCES hashtag(id)
+)
+
+CREATE TABLE IF NOT EXISTS room(
+    id BIGINT AUTO_INCREMENT,
+    type VARCHAR(50) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_DATE,
+    PRIMARY KEY(id)
+)
+
+CREATE TABLE IF NOT EXISTS users_room(
+    id BIGINT AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    room_id BIGINT NOT NULL,
+    PRIMARY KEY(id)
+)
+
+CREATE TABLE IF NOT EXISTS chat(
+    id BIGINT AUTO_INCREMENT,
+    room_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
+    message TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_DATE,
+    PRIMARY KEY(id),
+    FOREIGN KEY(room_id) REFERENCES room(id),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+)
+
+
+
+
+
+

@@ -20,14 +20,14 @@ public class BaseResponse<T> {
     private T data;
 
 
-//    // 요청에 성공한 경우
-//    public BaseResponse(T data) {
-//        this.success = SUCCESS.isSuccess();
-//        this.message = SUCCESS.getMessage();
-//        this.code = SUCCESS.getCode();
-//        this.data = data;
-//    }
-//
+    // 요청에 성공한 경우
+    public BaseResponse(T data) {
+        this.success = SUCCESS.isSuccess();
+        this.message = SUCCESS.getMessage();
+        this.code = SUCCESS.getCode();
+        this.data = data;
+    }
+
     // 요청에 실패한 경우
     public BaseResponse(BaseResponseStatus status) {
         this.success = status.isSuccess();

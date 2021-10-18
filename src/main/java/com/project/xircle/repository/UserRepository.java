@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
-public interface AuthRepository extends ReactiveCrudRepository<User,Long> {
+public interface UserRepository extends ReactiveCrudRepository<User,Long> {
 
     Mono<User> findByEmail(String email);
     Mono<User> findByDisplayName(String name);
