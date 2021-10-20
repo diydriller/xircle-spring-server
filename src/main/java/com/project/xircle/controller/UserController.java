@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    Mono<BaseResponse> createUser(CreateUserRequestDto userRequestDto, @RequestPart("profileImg") Mono<FilePart> file){
+    Mono<BaseResponse> createUser(@Valid CreateUserRequestDto userRequestDto, @RequestPart("profileImg") Mono<FilePart> file){
         return userService.createUser(userRequestDto,file);
     }
 

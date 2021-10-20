@@ -16,6 +16,7 @@ import org.springframework.data.redis.core.ReactiveRedisOperations;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 import java.nio.file.Path;
@@ -57,16 +58,16 @@ public class UserService {
                 .switchIfEmpty(Mono.just(new BaseResponse(SUCCESS)));
     }
 
-
+    @Transactional
     public Mono<BaseResponse> createUser(CreateUserRequestDto userRequestDto,Mono<FilePart> profileImg) {
         Path basePath= Paths.get(fileUploadPath);
-        User user= EntityDtoUtil.toEntity(userRequestDto);
+        User user= EntityDtoUtil.toUserEntity(userRequestDto);
 
         return profileImg
                 .flatMap(f->{
                     String currentDate = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
                     String imageExt = f.filename().split("\\.")[f.filename().split("\\.").length-1];
-                    String filename=currentDate+"."+imageExt;
+                    String filename="user"+currentDate+"."+imageExt;
                     user.setProfileImgSrc(fileDownPath+filename);
                     user.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
                     return f.transferTo(basePath.resolve(filename));

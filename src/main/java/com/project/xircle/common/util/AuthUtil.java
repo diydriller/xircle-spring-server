@@ -15,4 +15,9 @@ public class AuthUtil {
                 .sign(Algorithm.HMAC512("jwt sign value"));
         return jwtToken;
     }
+
+    public static Long getId(String token){
+        return JWT.require(Algorithm.HMAC512("jwt sign value")).build()
+                .verify(token).getClaim("id").asLong();
+    }
 }

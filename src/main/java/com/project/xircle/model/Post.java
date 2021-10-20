@@ -18,6 +18,8 @@ public class Post {
     private Long id;
     private String content;
     private String title;
+    @Column(value = "user_id")
+    private Long userId;
     @Column(value = "post_img_src")
     private String postImgSrc;
     @Column(value = "created_at")

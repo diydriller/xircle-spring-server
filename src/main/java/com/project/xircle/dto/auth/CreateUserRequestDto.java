@@ -6,30 +6,32 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 public class CreateUserRequestDto {
 
+    @NotEmpty(message = "displayName is empty")
+    private String displayName;
+    @NotEmpty(message = "password is empty")
+    private String password;
     @NotNull(message = "age is empty")
     private Integer age;
-    @NotNull(message = "gender is empty")
+    @NotEmpty(message = "gender is empty")
     private String gender;
-    @NotNull(message = "job is empty")
+    @NotEmpty(message = "job is empty")
     private String job;
-    @NotNull(message = "adjective is empty")
+    @NotEmpty(message = "adjective is empty")
     private String adjective;
-    @NotNull(message = "displayName is empty")
-    private String displayName;
-    @NotNull(message = "password is empty")
-    private String password;
-    @NotNull(message = "email is empty")
+    @NotEmpty(message = "email is empty")
     private String email;
+    @NotEmpty(message = "address is empty")
     private String address;
-    @NotNull(message = "phoneNumber is empty")
+    @NotEmpty(message = "phoneNumber is empty")
     private String phoneNumber;
     @NotNull(message = "isPublic is empty")
     private Boolean isPublic;
@@ -39,7 +41,7 @@ public class CreateUserRequestDto {
     private Double latitude;
     @NotNull(message = "longitude is empty")
     private Double longitude;
-    @NotNull(message = "university is empty")
+    @NotEmpty(message = "university is empty")
     private String university;
     @NotNull(message = "interestArr is empty")
     private List<String> interestArr;

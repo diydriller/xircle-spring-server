@@ -9,10 +9,10 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
 
-@Table(value = "users_hashtag")
+@Data
+@Table(value = "user_hashtag")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 public class UserHashtag {
     @Id
     private Long id;
@@ -22,4 +22,9 @@ public class UserHashtag {
     private Long hashtagId;
     @Column(value = "created_at")
     private LocalDateTime createdAt;
+
+    public UserHashtag(Long userId,Long hashtagId){
+        this.userId=userId;
+        this.hashtagId=hashtagId;
+    }
 }
