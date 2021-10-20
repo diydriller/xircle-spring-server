@@ -4,3 +4,8 @@ spring:
   redis:
     port: 6379
 
+file:
+  upload:
+    path: ./src/main/resources/static/
+  down:
+    path: http://localhost:9000/static/

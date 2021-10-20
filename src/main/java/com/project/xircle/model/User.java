@@ -1,10 +1,18 @@
 package com.project.xircle.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.time.LocalDateTime;
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(value = "users")
 @Data
 public class User {
@@ -36,4 +44,6 @@ public class User {
     private Boolean isLocationPublic;
     private Double longitude;
     private Double latitude;
+    @Column(value = "created_at")
+    private LocalDateTime createdAt;
 }

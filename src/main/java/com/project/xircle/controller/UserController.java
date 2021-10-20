@@ -4,6 +4,7 @@ import com.project.xircle.common.response.BaseResponse;
 import com.project.xircle.dto.auth.CheckEmailRequestDto;
 import com.project.xircle.dto.auth.CheckNameRequestDto;
 import com.project.xircle.dto.auth.CreateUserRequestDto;
+import com.project.xircle.dto.auth.LoginRequestDto;
 import com.project.xircle.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.codec.multipart.FilePart;
@@ -34,6 +35,12 @@ public class UserController {
     @PostMapping("/user")
     Mono<BaseResponse> createUser(CreateUserRequestDto userRequestDto, @RequestPart("profileImg") Mono<FilePart> file){
         return userService.createUser(userRequestDto,file);
+    }
+
+    @PostMapping("/login")
+    Mono<BaseResponse> login(@RequestBody @Valid LoginRequestDto requestDto){
+        return userService.login(requestDto);
+
     }
 
 }
