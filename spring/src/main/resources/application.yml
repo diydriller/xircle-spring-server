@@ -1,0 +1,28 @@
+server:
+  port: 9100
+
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/spring_xircle
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    generate-ddl: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+file:
+  upload:
+    path: /src/main/resources/static/
+  down:
+    path: http://localhost:9100/static/
+
+
+
+
