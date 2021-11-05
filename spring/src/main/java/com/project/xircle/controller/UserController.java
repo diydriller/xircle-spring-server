@@ -1,13 +1,10 @@
 package com.project.xircle.controller;
 
-import com.project.xircle.dto.user.CheckEmailRequestDto;
-import com.project.xircle.dto.user.CheckNameRequestDto;
-import com.project.xircle.dto.user.JoinRequestDto;
-import com.project.xircle.dto.user.LoginRequestDto;
+import com.project.xircle.dto.user.*;
 import com.project.xircle.error.BaseException;
 import com.project.xircle.response.BaseResponse;
 import com.project.xircle.service.UserService;
-import com.project.xircle.util.AuthUtil;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -84,6 +81,25 @@ public class UserController {
         try{
             Long id = userService.checkToken(token).getId();
             return new BaseResponse(userService.getProfile(id,userId));
+        }
+        catch (BaseException e){
+            return new BaseResponse(e.getStatus());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new BaseResponse(SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/users")
+    BaseResponse<?> getUsers(
+            @RequestParam(value = "age",required = false) Integer age,
+            @RequestParam(value = "university",required = false) String university,
+            @RequestParam(value = "gender",required = false) String gender,
+            @RequestHeader(value = "access_token") String token
+    ){
+        try{
+            userService.checkToken(token).getId();
+            return new BaseResponse(userService.getUsers(new GetUserCondition(age,university,gender)));
         }
         catch (BaseException e){
             return new BaseResponse(e.getStatus());

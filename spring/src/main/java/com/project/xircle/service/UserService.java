@@ -1,9 +1,6 @@
 package com.project.xircle.service;
 
-import com.project.xircle.dto.user.GetProfileResponseDto;
-import com.project.xircle.dto.user.JoinRequestDto;
-import com.project.xircle.dto.user.LoginRequestDto;
-import com.project.xircle.dto.user.LoginResponseDto;
+import com.project.xircle.dto.user.*;
 import com.project.xircle.error.BaseException;
 import com.project.xircle.model.Interest;
 import com.project.xircle.model.User;
@@ -104,6 +101,12 @@ public class UserService {
         return responseDto;
     }
 
+
+    public List<GetUserResponseDto> getUsers(GetUserCondition condition) {
+        return userRepository.findUserByCondition(condition);
+    }
+
+
     // 이미지 업로드 함수
     String imageUpload(MultipartFile imageFile) throws BaseException, IOException {
 
@@ -124,7 +127,6 @@ public class UserService {
 
         return imageDownUrl;
     }
-
 
 
 }
